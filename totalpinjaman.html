@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Simulasi Kredit</title>
+</head>
+<body>
+
+<div style="width: 360px; height: 550px; position: relative; background: white; border: 1px #FF8800 solid">
+  <div style="width: 360px; height: 530px; left: 0px; top: 20px; position: absolute">
+    <div style="width: 360px; height: 530px; left: 0px; top: 0px; position: absolute; background: white"></div>
+    <div style="width: 300px; height: 50px; left: 32px; top: 429px; position: absolute" onclick="resetForm()">
+	  <div style="width: 300px; height: 50px; left: 0px; top: 0px; position: absolute; background: white; border-radius: 15px; border: 0.50px #FF8800 solid"></div>
+	  <div style="width: 300px; left: 0px; top: 10px; position: absolute; text-align: center; color: #FF8800; font-size: 20px; font-family: Poppins; font-weight: 700; word-wrap: break-word">Atur ulang</div>
+	</div>
+    <div style="width: 300px; height: 50px; left: 32px; top: 365px; position: absolute; cursor: pointer;" onclick="hitung()">
+	  <div style="width: 300px; height: 50px; left: 0px; top: 0px; position: absolute; background: #FF8800; border-radius: 15px"></div>
+	  <div style="width: 300px; left: 0px; top: 10px; position: absolute; text-align: center; color: white; font-size: 20px; font-family: Poppins; font-weight: 700; word-wrap: break-word">Hitung</div>
+	</div>
+    <div style="width: 300px; height: 72px; left: 32px; top: 269px; position: absolute">
+	  <div style="width: 300px; height: 50px; left: 0px; top: 22px; position: absolute; background: white; border-radius: 15px; border: 0.50px #B8B8B8 solid"></div>
+	  <div style="width: 75px; height: 50px; left: 225px; top: 22px; position: absolute; background: #FF8800; border-bottom-right-radius: 15px; border-top-right-radius: 15px; border: 0.50px #B8B8B8 solid"></div>
+	  <div style="left: 256px; top: 36px; position: absolute; color: white; font-size: 14px; font-family: Poppins; font-weight: 600; word-wrap: break-word">%</div>
+	  <div style="left: 0px; top: 0px; position: absolute; color: #636363; font-size: 14px; font-family: Poppins; font-weight: 600; word-wrap: break-word">Suku Bunga (Flat per Bulan)</div>
+	  <input type="number" id="bunga" step="0.01" min="0" style="width: 201px; height: 30px; left: 10px; top: 30px; position: absolute; text-align: right; color: #636363; font-size: 20px; font-family: Poppins; font-weight: 600; word-wrap: break-word" value="2.0"/>
+	</div>
+    <div style="width: 300px; height: 72px; left: 32px; top: 183px; position: absolute">
+	  <div style="width: 300px; height: 50px; left: 0px; top: 22px; position: absolute; background: white; border-radius: 15px; border: 0.50px #B8B8B8 solid"></div>
+	  <div style="left: 0px; top: 0px; position: absolute; color: #636363; font-size: 14px; font-family: Poppins; font-weight: 600; word-wrap: break-word">Jangka Waktu Kredit</div>
+	  <input type="text" id="waktu" onkeyup="formatRupiah(this)" style="width: 201px; height: 30px; left: 10px; top: 30px; position: absolute; text-align: right; color: #636363; font-size: 20px; font-family: Poppins; font-weight: 600; word-wrap: break-word" value="48" />
+	  <div style="width: 75px; height: 50px; left: 225px; top: 22px; position: absolute; background: #FF8800; border-top-right-radius: 15px; border-bottom-right-radius: 15px; border: 0.50px #B8B8B8 solid"></div>
+	  <div style="left: 242px; top: 36px; position: absolute; color: white; font-size: 14px; font-family: Poppins; font-weight: 600; word-wrap: break-word">Bulan</div>
+	</div>
+    <div style="width: 300px; height: 73px; left: 32px; top: 96px; position: absolute">
+	  <div style="width: 300px; height: 50px; left: 0px; top: 23px; position: absolute; background: white; border-radius: 15px; border: 0.50px #B8B8B8 solid"></div>
+	  <div style="left: 0px; top: 0px; position: absolute; color: #636363; font-size: 14px; font-family: Poppins; font-weight: 600; word-wrap: break-word">Total Pinjaman</div>
+	  <div style="width: 50px; height: 50px; left: 0px; top: 23px; position: absolute; background: #FF8800; border-top-left-radius: 15px; border-bottom-left-radius: 15px; border: 0.50px #B8B8B8 solid"></div>
+	  <div style="left: 16px; top: 37px; position: absolute; color: white; font-size: 14px; font-family: Poppins; font-weight: 600; word-wrap: break-word">Rp</div>
+	  <div style="width: 270px; height: 30px; left: 13px; top: 33px; position: absolute; text-align: right; color: #636363; font-size: 20px; font-family: Poppins; font-weight: 600; word-wrap: break-word"></div>
+	  <input type="text" id="pinjaman" onkeyup="formatRupiah(this)" style="width: 220px; height: 30px; right: 13px; top: 30px; position: absolute; text-align: right; color: #636363; font-size: 20px; font-family: Poppins; font-weight: 600; word-wrap: break-word" value="150000000" />
+	</div>
+    <div style="width: 300px; left: 32px; top: 61px; position: absolute; color: #636363; font-size: 14px; font-family: Poppins; font-weight: 400; word-wrap: break-word">Sesuaikan dengan kebutuhan Anda</div>
+  </div>
+  <div style="width: 360px; height: 40px; left: 0px; top: 20px; position: absolute">
+    <div style="width: 360px; height: 40px; left: 0px; top: 0px; position: absolute; background: #FF8800"></div>
+    <div style="width: 40px; height: 40px; left: 0px; top: 0px; position: absolute; background: #FF8800"></div>
+    <div style="width: 360px; height: 40px; left: 0px; top: 0px; position: absolute; text-align: center; color: white; font-size: 16px; font-family: Poppins; font-weight: 600; word-wrap: break-word">SIMULASI KREDIT</div>
+  </div>
+  <div style="width: 360px; height: 20px; left: 0px; top: 0px; position: absolute">
+    <div style="width: 360px; height: 20px; left: 0px; top: 0px; position: absolute; background: #FF8800"></div>
+    <div style="width: 360px; height: 20px; padding-left: 16px; padding-right: 16px; padding-top: 2.86px; padding-bottom: 2.86px; left: 0px; top: 0px; position: absolute; justify-content: center; align-items: center; display: inline-flex">
+    </div>
+  </div>
+</div>
+
+<div id="hasil" style="display:none;">
+  <h2 style="color: #636363; font-family: Poppins;">Hasil Perhitungan</h2>
+  <table style="width: 50%; border-collapse: collapse; margin-top: 20px; font-family: Poppins;">
+    <tr>
+      <td style="border: 1px solid #B8B8B8; padding: 10px; color: #636363;">Total Pinjaman (Rp):</td>
+      <td style="border: 1px solid #B8B8B8; padding: 10px;"><strong id="totalpinjaman" style="color: #636363; font-weight: 600;"></strong></td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #B8B8B8; padding: 10px; color: #636363;">Tenor:</td>
+      <td style="border: 1px solid #B8B8B8; padding: 10px;"><strong id="tenor" style="color: #636363; font-weight: 600;"></strong></td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #B8B8B8; padding: 10px; color: #636363;">Setara dengan Suku Bunga:</td>
+      <td style="border: 1px solid #B8B8B8; padding: 10px;"><strong id="setara_dengan_suku_bunga" style="color: #636363; font-weight: 600;"></strong></td>
+    </tr>
+    <tr>
+      <td style="border: 1px solid #B8B8B8; padding: 10px; color: #636363;">Angsuran:</td>
+      <td style="border: 1px solid #B8B8B8; padding: 10px;"><strong id="hasil_total_angsuran_bulan" style="color: #636363; font-weight: 600;"></strong></td>
+    </tr>
+  </table>
+</div>
+
+
+<script>
+function resetForm() {
+  document.getElementById("pinjaman").value = "";
+  document.getElementById("waktu").value = "";
+  document.getElementById("bunga").value = "";
+}
+
+function formatRupiah(input) {
+  var value = input.value;
+
+  var number_string = value.replace(/[^,\d]/g, "").toString(),
+    split = number_string.split(","),
+    sisa = split[0].length % 3,
+    rupiah = split[0].substr(0, sisa),
+    ribuan = split[0].substr(sisa).match(/\d{3}/g);
+
+  if (ribuan) {
+    separator = sisa ? "." : "";
+    rupiah += separator + ribuan.join(".");
+  }
+
+  input.value = split[1] != undefined ? rupiah + "," + split[1] : rupiah;
+}
+
+function hitung() {
+  var pinjaman = document.getElementById("pinjaman").value.replace(/\./g, ""),
+    dsr = 0.9,
+    total_pinjaman = parseInt(pinjaman),
+    bunga_bln = parseFloat(document.getElementById("bunga").value),
+    float_bunga_bulan = parseFloat(bunga_bln),
+    jangka_waktu = parseInt(document.getElementById("waktu").value);
+  var setara_dengan_suku_bunga =
+    rate(jangka_waktu, -((pinjaman / jangka_waktu) + pinjaman * float_bunga_bulan / 100), pinjaman) * 12 * 100;
+  var total_angsuran_bulan =
+    (pinjaman * (setara_dengan_suku_bunga / 100 / 12)) /
+    (1 - 1 / Math.pow(1 + setara_dengan_suku_bunga / 100 / 12, jangka_waktu));
+
+  document.getElementById("totalpinjaman").innerText = toRp(Math.round(pinjaman));
+  document.getElementById("tenor").innerText = jangka_waktu + " Bulan";
+  document.getElementById("setara_dengan_suku_bunga").innerText = truncateDecimals(setara_dengan_suku_bunga, 4) + "% per tahun";
+  document.getElementById("hasil_total_angsuran_bulan").innerText = toRp(Math.round(total_angsuran_bulan));
+
+  document.getElementById("hasil").style.display = "block";
+}
+
+function toRp(angka) {
+  var rev = parseInt(angka, 10).toString().split('').reverse().join('');
+  var rev2 = '';
+  for (var i = 0; i < rev.length; i++) {
+    rev2 += rev[i];
+    if ((i + 1) % 3 === 0 && i !== (rev.length - 1)) {
+      rev2 += '.';
+    }
+  }
+  return 'Rp. ' + rev2.split('').reverse().join('') + ',00';
+}
+
+function truncateDecimals(num, digits) {
+  var numS = num.toString(),
+    decPos = numS.indexOf('.'),
+    substrLength = decPos == -1 ? numS.length : 1 + decPos + digits,
+    trimmedResult = numS.substr(0, substrLength),
+    finalResult = isNaN(trimmedResult) ? 0 : trimmedResult;
+
+  return parseFloat(finalResult);
+}
+
+var rate = function(nper, pmt, pv, fv, type, guess) {
+    // Sets default values for missing parameters
+    fv = typeof fv !== 'undefined' ? fv : 0;
+    type = typeof type !== 'undefined' ? type : 0;
+    guess = typeof guess !== 'undefined' ? guess : 0;
+
+    // Sets the limits for possible guesses to any
+    // number between 0% and 100%
+    var lowLimit = 0;
+    var highLimit = 1;
+
+   // Defines a tolerance of up to +/- 0.00005% of pmt, to accept
+   // the solution as valid.
+   var tolerance = Math.abs(0.00000005 * pmt);
+
+   // Tries at most 40 times to find a solution within the tolerance.
+   for (var i = 0; i < 40; i++) {
+       // Resets the balance to the original pv.
+       var balance = pv;
+
+       // Calculates the balance at the end of the loan, based
+       // on loan conditions.
+       for (var j = 0; j < nper; j++ ) {
+           if (type == 0) {
+               // Interests applied before payment
+               balance = balance * (1 + guess) + pmt;
+           } else {
+               // Payments applied before insterests
+               balance = (balance + pmt) * (1 + guess);
+           }
+       }
+
+       // Returns the guess if balance is within tolerance.  If not, adjusts
+       // the limits and starts with a new guess.
+       if (Math.abs(balance + fv) < tolerance) {
+           return guess;
+       } else if (balance + fv > 0) {
+           // Sets a new highLimit knowing that
+           // the current guess was too big.
+           highLimit = guess;
+       } else  {
+           // Sets a new lowLimit knowing that
+           // the current guess was too small.
+           lowLimit = guess;
+       }
+
+       // Calculates the new guess.
+       guess = (highLimit + lowLimit) / 2;
+   }
+
+   // Returns null if no acceptable result was found after 40 tries.
+   return null;
+};
+
+</script>
+
+</body>
+</html>
